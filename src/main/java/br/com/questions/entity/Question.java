@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
@@ -16,12 +17,18 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotEmpty
     @ManyToOne
     @JoinColumn(name = "id_user")
     private User user;
 
+    @NotEmpty
     @OneToMany(mappedBy = "question")
     private Set<QuestionsFlags> questionsFlags;
+
+    @Column
+    @NotEmpty
+    private String comment;
 
     @Column
     private Boolean resolved;

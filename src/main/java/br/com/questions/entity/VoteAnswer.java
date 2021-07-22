@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 
 @Data
@@ -17,19 +18,23 @@ public class VoteAnswer {
     @OneToOne(cascade = CascadeType.ALL)
     @MapsId
     @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @NotEmpty
     private User user;
 
     @OneToOne(cascade = CascadeType.ALL)
     @MapsId
     @JoinColumn(name = "question_id", referencedColumnName = "id")
+    @NotEmpty
     private Question question;
 
     @OneToOne(cascade = CascadeType.ALL)
     @MapsId
     @JoinColumn(name = "answer_id", referencedColumnName = "id")
+    @NotEmpty
     private Answer answer;
 
     @Column
+    @NotEmpty
     private Integer score;
 
     @Column

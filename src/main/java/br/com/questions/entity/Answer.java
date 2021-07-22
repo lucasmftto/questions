@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 
 @Data
@@ -16,13 +17,16 @@ public class Answer {
 
     @ManyToOne
     @JoinColumn(name = "id_user")
+    @NotEmpty
     private User user;
 
     @ManyToOne
     @JoinColumn(name = "id_question")
+    @NotEmpty
     private Question question;
 
     @Column
+    @NotEmpty
     private String comment;
 
     @Column
