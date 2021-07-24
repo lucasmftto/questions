@@ -1,10 +1,7 @@
 package br.com.questions.controllers;
 
-import br.com.questions.entity.Role;
-import br.com.questions.service.RoleService;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiModelProperty;
+import br.com.questions.entity.Question;
+import br.com.questions.service.QuestionService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.MDC;
@@ -17,51 +14,50 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/role")
+@RequestMapping("/question")
 @RequiredArgsConstructor
 @CrossOrigin("*")
-public class RoleController {
+public class QuestionController {
 
     @Autowired
-    private RoleService service;
+    private QuestionService service;
 
-    @ApiOperation(value = "Insere nova Role")
+    @ApiOperation(value = "Insere nova Pergunta")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Role save(@RequestBody()  @Valid Role role) {
+    public Question save(@RequestBody @Valid Question question) {
         MDC.clear();
         MDC.put("Insert Role: ", String.valueOf(UUID.randomUUID()));
-        return service.insertRole(role);
+        return service.insertQuestion(question);
     }
 
     @GetMapping("{id}")
-    public Role findById(@PathVariable Long id) {
+    public Question findById(@PathVariable Long id) {
         MDC.clear();
         MDC.put("Find One: ", String.valueOf(UUID.randomUUID()));
         return service.findById(id);
     }
 
     @GetMapping
-    public List<Role> findAll(){
+    public List<Question> findAll(){
         MDC.clear();
         MDC.put("Find All: ", String.valueOf(UUID.randomUUID()));
-        return this.service.findAllRoles();
+        return this.service.findAllQuestion();
     }
 
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
         MDC.clear();
-        MDC.put("Delete Rone: ", String.valueOf(UUID.randomUUID()));
-        this.service.deleteRole(id);
+        MDC.put("Delete Question: ", String.valueOf(UUID.randomUUID()));
+        this.service.deleteQuestion(id);
     }
 
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@PathVariable Long id, @Valid @RequestBody Role newRole) {
+    public void update(@PathVariable Long id, @Valid @RequestBody Question newQuestion) {
         MDC.clear();
         MDC.put("Update Rone: ", String.valueOf(UUID.randomUUID()));
-        this.service.updateRole(id, newRole);
+        this.service.updateQuestion(id, newQuestion);
     }
-
 }

@@ -1,5 +1,6 @@
 package br.com.questions.entity;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,6 +15,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Role extends Auditing {
 
+    @ApiModelProperty(value = "Código da Role")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

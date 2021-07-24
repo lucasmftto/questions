@@ -13,7 +13,7 @@ public class VoteAnswer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
     @MapsId
