@@ -30,7 +30,7 @@ public class RoleController {
     }
 
     @GetMapping("{id}")
-    public Role findById(@PathVariable Integer id) {
+    public Role findById(@PathVariable Long id) {
         MDC.clear();
         MDC.put("Find One: ", String.valueOf(UUID.randomUUID()));
         return service.findById(id);
@@ -45,7 +45,7 @@ public class RoleController {
 
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Integer id) {
+    public void delete(@PathVariable Long id) {
         MDC.clear();
         MDC.put("Delete Rone: ", String.valueOf(UUID.randomUUID()));
         this.service.deleteRole(id);
@@ -53,7 +53,7 @@ public class RoleController {
 
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@PathVariable Integer id, @Valid @RequestBody Role newRole) {
+    public void update(@PathVariable Long id, @Valid @RequestBody Role newRole) {
         MDC.clear();
         MDC.put("Update Rone: ", String.valueOf(UUID.randomUUID()));
         this.service.updateRole(id, newRole);

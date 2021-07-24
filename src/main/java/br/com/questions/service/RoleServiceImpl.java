@@ -26,7 +26,7 @@ public class RoleServiceImpl implements  RoleService{
     }
 
     @Override
-    public void deleteRole(Integer id) {
+    public void deleteRole(Long id) {
         this.roleRepository.findById(id).map(
                 role -> {
                     logger.info("Deletanto objeto Role: " + role.toString());
@@ -37,7 +37,7 @@ public class RoleServiceImpl implements  RoleService{
     }
 
     @Override
-    public void updateRole(Integer id, Role newRole) {
+    public void updateRole(Long id, Role newRole) {
         logger.info("Atualizando objeto Role: " + newRole.toString());
         this.roleRepository.findById(id).map(
                 role -> {
@@ -53,7 +53,7 @@ public class RoleServiceImpl implements  RoleService{
         return this.roleRepository.findAll();
     }
     @Override
-    public Role findById(Integer id) {
+    public Role findById(Long id) {
         logger.info("Pesquisando objeto Role: " + id);
         return this.roleRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Role não encontrada"));

@@ -1,43 +1,45 @@
 package br.com.questions.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
-public class User {
+public class User extends Auditing {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column
-    @NotEmpty
+    @NotNull(message = "Nome obrigatorio")
     private String name;
 
-    @Column
+    @Column(updatable = false)
     @Email
-    @NotEmpty
+    @NotNull(message = "E-mail obrigatorio")
     private String email;
 
     @Column
-    @NotEmpty
+    @NotNull(message = "Data de nascimento obrigatorio")
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate birthDate;
 
     @Column
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate createdAt;
-
-    @Column
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate updateAt;
-
-    @Column
     private Boolean enabled;
+
+    @PrePersist
+    public void prePersist() {
+        setEnabled(true);
+    }
 }
