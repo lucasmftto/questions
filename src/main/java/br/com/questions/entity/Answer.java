@@ -21,7 +21,7 @@ public class Answer extends Auditing{
     @NotNull(message = "User obrigatorio")
     private User user;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "id_question")
     @NotNull(message = "Question obrigatorio")
     private Question question;

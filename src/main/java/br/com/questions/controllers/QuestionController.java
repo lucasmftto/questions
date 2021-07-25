@@ -65,4 +65,13 @@ public class QuestionController {
         MDC.put("Update Question: ", String.valueOf(UUID.randomUUID()));
         this.service.updateQuestion(id, questionDto);
     }
+
+    @ApiOperation(value = "Atualiza Pergunta Resolvida")
+    @PutMapping("resolved/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateResolved(@PathVariable Long id, @Valid @RequestBody Boolean resolved) {
+        MDC.clear();
+        MDC.put("Update Question Resolvida: ", String.valueOf(UUID.randomUUID()));
+        this.service.updateResolved(id, resolved);
+    }
 }

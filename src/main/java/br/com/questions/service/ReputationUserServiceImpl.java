@@ -59,6 +59,11 @@ public class ReputationUserServiceImpl implements ReputationUserService{
     }
 
     @Override
+    public void updateReputationUser(ReputationUser reputationUser) {
+        this.reputationUserRepository.save(reputationUser);
+    }
+
+    @Override
     public List<ReputationUser> findAllReputationUser() {
         return reputationUserRepository.findAll();
     }
@@ -67,6 +72,13 @@ public class ReputationUserServiceImpl implements ReputationUserService{
     public ReputationUser findByIdReputationUser(Long id) {
         logger.info("Pesquisando ReputationUser por Id: " + id);
         return this.reputationUserRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "ReputationUser não encontrado"));
+    }
+
+    @Override
+    public ReputationUser findByUserId(Long id) {
+        logger.info("Pesquisando ReputationUser por Id: " + id);
+        return this.reputationUserRepository.findByUserId(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "ReputationUser não encontrado"));
     }
 }

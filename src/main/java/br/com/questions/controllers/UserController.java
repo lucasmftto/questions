@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @RestController
@@ -58,12 +59,24 @@ public class UserController {
         this.service.updateUser(id, userDto);
     }
 
-    @ApiOperation(value = "Pesquida Paginada Usuario")
+//    @ApiOperation(value = "Pesquida Paginada Usuario")
+//    @GetMapping
+//    public Page<User> list(
+//            @RequestParam(value = "page", defaultValue = "0") Integer page,
+//            @RequestParam(value = "size", defaultValue = "10") Integer pageSize
+//    ){
+//        return this.service.findPaginableUsers(page, pageSize);
+//    }
+
+    @ApiOperation(value = "Pesquida Paginada Usuario  com Filtro")
     @GetMapping
-    public Page<User> list(
+    public Page<User> listByNomeAndEmailAndBirthDate(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
-            @RequestParam(value = "size", defaultValue = "10") Integer pageSize
+            @RequestParam(value = "size", defaultValue = "10") Integer pageSize,
+            @RequestParam(value = "nome", required = false, defaultValue = "") String nome,
+            @RequestParam(value = "email", required = false, defaultValue = "") String email,
+            @RequestParam(value = "birthDate", required = false, defaultValue = "") LocalDate birthDate
     ){
-        return this.service.findPaginableUsers(page, pageSize);
+        return this.service.findByNomeAndEmailAndBirthDate(page, pageSize, "%"+nome+"%", "%"+email+"%", birthDate);
     }
 }

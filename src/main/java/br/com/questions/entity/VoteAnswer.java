@@ -16,23 +16,21 @@ public class VoteAnswer extends Auditing {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    @NotNull(message = "User obrigatorio")
+    @ManyToOne(optional=false)
+    @JoinColumn(name = "userId", unique=true)
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "question_id")
-    @NotNull(message = "Question obrigatorio")
+    @ManyToOne(optional=false)
+    @JoinColumn(name = "questionId", unique=true)
     private Question question;
 
-    @ManyToOne
-    @JoinColumn(name = "answer_id")
-    @NotNull(message = "Answer obrigatorio")
+    @ManyToOne(optional=false)
+    @JoinColumn(name = "answerId", unique=true)
     private Answer answer;
 
     @Column
     @NotNull(message = "score obrigatorio")
     private Long score;
 
+    public VoteAnswer() {}
 }

@@ -1,6 +1,7 @@
 package br.com.questions.service;
 
 import br.com.questions.dto.VoteAnswerDto;
+import br.com.questions.entity.ReputationUser;
 import br.com.questions.entity.VoteAnswer;
 import br.com.questions.repository.VoteAnswerRepository;
 import org.slf4j.Logger;
@@ -27,6 +28,9 @@ public class VoteAnswerServiceImpl implements VoteAnswerService{
     private AnswerService answerService;
 
     @Autowired
+    private ReputationUserService reputationUserService;
+
+    @Autowired
     private VoteAnswerRepository voteAnswerRepository;
 
     @Override
@@ -47,6 +51,11 @@ public class VoteAnswerServiceImpl implements VoteAnswerService{
         this.voteAnswerRepository.findById(id).map(
                 voteAnswer -> {
                     logger.info("Deletanto objeto VoteAnswer: " + voteAnswer.toString());
+
+                    ReputationUser ru = reputationUserService.findByUserId(voteAnswer.getUser().getId());
+                    ru.setScore(ru.getScore() - voteAnswer.getScore());
+                    reputationUserService.updateReputationUser(ru);
+
                     this.voteAnswerRepository.delete(voteAnswer);
                     return Void.TYPE;
                 }
@@ -78,5 +87,23 @@ public class VoteAnswerServiceImpl implements VoteAnswerService{
         logger.info("Pesquisando VoteAnswer por Id: " + id);
         return this.voteAnswerRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "VoteAnswer não encontrado"));
+    }
+
+    @Override
+    public void deleteVoteAnswerByQuestion(Long questionId) {
+        logger.info("Deletetando VoteAnswer por questionId: " + questionId);
+        this.voteAnswerRepository.deleteByQuestionId(questionId);
+    }
+
+    @Override
+    public void deleteVoteAnswerByAnswer(Long id, Long questionId) {
+        logger.info("Deletetando VoteAnswer por Answer: " + id);
+        this.voteAnswerRepository.deleteByAnswerIdAndQuestionId(id, questionId);
+    }
+
+    @Override
+    public VoteAnswer findByAnswerAndQuestion(Long answerId, Long questionId) {
+        logger.info("Find VoteAnswer por Answer and Question: " + questionId);
+        return this.voteAnswerRepository.findByAnswerIdAndQuestionId(answerId, questionId);
     }
 }

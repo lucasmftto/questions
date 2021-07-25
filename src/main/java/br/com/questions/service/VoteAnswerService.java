@@ -11,4 +11,10 @@ public interface VoteAnswerService {
     void updateVoteAnswer(Long id, VoteAnswerDto voteAnswerDto);
     List<VoteAnswer> findAllVoteAnswer();
     VoteAnswer findById(Long id);
+
+    void deleteVoteAnswerByQuestion(Long questionId);
+
+    void deleteVoteAnswerByAnswer(Long id, Long questionId);
+
+    VoteAnswer findByAnswerAndQuestion(Long answerId, Long questionId);
 }

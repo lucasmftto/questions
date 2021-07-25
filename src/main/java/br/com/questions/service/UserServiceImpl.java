@@ -8,11 +8,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -83,5 +85,18 @@ public class UserServiceImpl implements UserService {
         Sort sort = Sort.by(Sort.Direction.ASC, "id");
         PageRequest pageRequest = PageRequest.of(page, pageSize, sort);
         return userRepository.findAll(pageRequest);
+    }
+
+    @Override
+    public Page<User> findByNomeAndEmailAndBirthDate(Integer page, Integer pageSize, String nome, String email, LocalDate birthDate) {
+        Integer isBirthDate = 0;
+
+        Pageable pageable = PageRequest.of(page, pageSize, Sort.Direction.ASC, "id");
+
+        if (birthDate == null){
+            isBirthDate = 1;
+        }
+
+        return userRepository.findByNomeAndEmailAndBirthDate(pageable, nome, email,  isBirthDate, birthDate);
     }
 }
