@@ -5,9 +5,9 @@ import br.com.questions.entity.Role;
 import java.util.List;
 
 public interface RoleService {
-    public Role insertRole(Role role);
-    public void deleteRole(Long Id);
-    public void updateRole(Long id, Role newRole);
-    public List<Role> findAllRoles();
-    public Role findById(Long id);
+    Role insertRole(Role role);
+    void deleteRole(Long Id);
+    void updateRole(Long id, Role newRole);
+    List<Role> findAllRoles();
+    Role findById(Long id);
 }

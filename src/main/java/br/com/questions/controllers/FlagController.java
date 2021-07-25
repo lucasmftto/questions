@@ -1,8 +1,7 @@
 package br.com.questions.controllers;
 
-import br.com.questions.dto.QuestionDto;
-import br.com.questions.entity.Question;
-import br.com.questions.service.QuestionService;
+import br.com.questions.entity.Flag;
+import br.com.questions.service.FlagService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.MDC;
@@ -15,54 +14,54 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/question")
+@RequestMapping("/flag")
 @RequiredArgsConstructor
 @CrossOrigin("*")
-public class QuestionController {
+public class FlagController {
 
     @Autowired
-    private QuestionService service;
+    private FlagService service;
 
-    @ApiOperation(value = "Insere nova Pergunta")
+    @ApiOperation(value = "Insere nova Flag")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Question save(@RequestBody @Valid QuestionDto question) {
+    public Flag save(@RequestBody @Valid Flag flag) {
         MDC.clear();
-        MDC.put("Insert Question: ", String.valueOf(UUID.randomUUID()));
-        return service.insertQuestion(question);
+        MDC.put("Insert Flag: ", String.valueOf(UUID.randomUUID()));
+        return service.insertFlag(flag);
     }
 
-    @ApiOperation(value = "Pesquida Pergunta por ID")
+    @ApiOperation(value = "Consulta Flag por id")
     @GetMapping("{id}")
-    public Question findById(@PathVariable Long id) {
+    public Flag findById(@PathVariable Long id) {
         MDC.clear();
         MDC.put("Find One: ", String.valueOf(UUID.randomUUID()));
         return service.findById(id);
     }
 
-    @ApiOperation(value = "Pesquisa todas Perguntas")
+    @ApiOperation(value = "Consulta todas Flag")
     @GetMapping
-    public List<Question> findAll(){
+    public List<Flag> findAll(){
         MDC.clear();
         MDC.put("Find All: ", String.valueOf(UUID.randomUUID()));
-        return this.service.findAllQuestion();
+        return this.service.findAllFlag();
     }
 
-    @ApiOperation(value = "Deleta Pergunta")
+    @ApiOperation(value = "Deleta Flag")
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
         MDC.clear();
         MDC.put("Delete Question: ", String.valueOf(UUID.randomUUID()));
-        this.service.deleteQuestion(id);
+        this.service.deleteFlag(id);
     }
 
-    @ApiOperation(value = "Atualiza Pergunta")
+    @ApiOperation(value = "Atualiza Flag")
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@PathVariable Long id, @Valid @RequestBody QuestionDto questionDto) {
+    public void update(@PathVariable Long id, @Valid @RequestBody Flag flag) {
         MDC.clear();
-        MDC.put("Update Question: ", String.valueOf(UUID.randomUUID()));
-        this.service.updateQuestion(id, questionDto);
+        MDC.put("Update Flag: ", String.valueOf(UUID.randomUUID()));
+        this.service.updateFlag(id, flag);
     }
 }

@@ -4,26 +4,20 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Data
 @Entity
-public class Flag {
+public class Flag extends Auditing {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(nullable = false)
+    @NotNull(message = "Description obrigatorio")
     private String description;
-
-    @Column
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate createdAt;
-
-    @Column
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate updateAt;
 
     @Column
     private Boolean enabled;

@@ -5,35 +5,29 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Data
 @Entity
-public class Answer {
+public class Answer extends Auditing{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "id_user")
-    @NotEmpty
+    @NotNull(message = "User obrigatorio")
     private User user;
 
     @ManyToOne
     @JoinColumn(name = "id_question")
-    @NotEmpty
+    @NotNull(message = "Question obrigatorio")
     private Question question;
 
     @Column
-    @NotEmpty
+    @NotNull(message = "Comment obrigatorio")
     private String comment;
 
-    @Column
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate createdAt;
-
-    @Column
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate updateAt;
 }

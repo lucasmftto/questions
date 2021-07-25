@@ -4,29 +4,24 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Data
 @Entity
-public class ReputationUser {
+public class ReputationUser extends Auditing {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @MapsId
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @NotNull(message = "Usuario obrigatorio")
+    @ManyToOne
+    @JoinColumn(name = "id_user")
     private User user;
 
     @Column
-    private Integer score;
+    @NotNull(message = "Score obrigatorio")
+    private Long score;
 
-    @Column
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate createdAt;
-
-    @Column
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate updateAt;
 }

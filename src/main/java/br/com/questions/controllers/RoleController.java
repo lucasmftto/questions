@@ -25,7 +25,7 @@ public class RoleController {
     @Autowired
     private RoleService service;
 
-    @ApiOperation(value = "Insere nova Role")
+    @ApiOperation(value = "Insere nova Roles")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Role save(@RequestBody()  @Valid Role role) {
@@ -34,6 +34,7 @@ public class RoleController {
         return service.insertRole(role);
     }
 
+    @ApiOperation(value = "Pesquisa Roles por Id")
     @GetMapping("{id}")
     public Role findById(@PathVariable Long id) {
         MDC.clear();
@@ -41,6 +42,7 @@ public class RoleController {
         return service.findById(id);
     }
 
+    @ApiOperation(value = "Pesquisa Roles")
     @GetMapping
     public List<Role> findAll(){
         MDC.clear();
@@ -48,6 +50,7 @@ public class RoleController {
         return this.service.findAllRoles();
     }
 
+    @ApiOperation(value = "Delete Roles por Id")
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
@@ -56,6 +59,7 @@ public class RoleController {
         this.service.deleteRole(id);
     }
 
+    @ApiOperation(value = "Atualiza Roles por Id")
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@PathVariable Long id, @Valid @RequestBody Role newRole) {

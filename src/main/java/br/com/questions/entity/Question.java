@@ -4,7 +4,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Set;
 
 @Data
 @Entity
@@ -20,8 +19,9 @@ public class Question extends Auditing{
     private User user;
 
     @NotNull(message = "Flag obrigatorio")
-    @OneToMany(mappedBy = "question")
-    private Set<QuestionsFlags> questionsFlags;
+    @ManyToOne()
+    @JoinColumn(name = "id_flag")
+    private Flag flag;
 
     @Column
     @NotNull(message = "Comentario obrigatorio")

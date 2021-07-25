@@ -1,5 +1,6 @@
 package br.com.questions.service;
 
+import br.com.questions.dto.UserDto;
 import br.com.questions.entity.User;
 import br.com.questions.repository.UserRepository;
 import org.slf4j.Logger;
@@ -20,11 +21,22 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private RoleService roleService;
+
     Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Override
-    public User insertUser(User user) {
-        logger.info("Inseringo objeto User: " + user.toString());
+    public User insertUser(UserDto userDto) {
+        logger.info("Inseringo objeto User: " + userDto.toString());
+        User user = new User();
+
+        user.setEnabled(userDto.getEnabled());
+        user.setEmail(userDto.getEmail());
+        user.setBirthDate(userDto.getBirthDate());
+        user.setRole(this.roleService.findById(userDto.getRoleId()));
+        user.setName(userDto.getName());
+
         return this.userRepository.save(user);
     }
 
@@ -40,12 +52,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUser(Long id, User newUser) {
-        logger.info("Atualizando objeto User: " + newUser.toString());
+    public void updateUser(Long id, UserDto userDto) {
+        logger.info("Atualizando objeto User: " + userDto.toString());
         this.userRepository.findById(id).map(
-                role -> {
-                    newUser.setId(role.getId());
-                    userRepository.save(newUser);
+                user -> {
+                    user.setRole(this.roleService.findById(userDto.getRoleId()));
+                    user.setName(userDto.getName());
+                    user.setEnabled(userDto.getEnabled());
+                    user.setBirthDate(userDto.getBirthDate());
+                    userRepository.save(user);
                     return Void.TYPE;
                 }
         ).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario não encontrado"));

@@ -5,43 +5,34 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Data
 @Entity
-public class VoteAnswer {
+public class VoteAnswer extends Auditing {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @MapsId
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    @NotEmpty
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @NotNull(message = "User obrigatorio")
     private User user;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @MapsId
-    @JoinColumn(name = "question_id", referencedColumnName = "id")
-    @NotEmpty
+    @ManyToOne
+    @JoinColumn(name = "question_id")
+    @NotNull(message = "Question obrigatorio")
     private Question question;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @MapsId
-    @JoinColumn(name = "answer_id", referencedColumnName = "id")
-    @NotEmpty
+    @ManyToOne
+    @JoinColumn(name = "answer_id")
+    @NotNull(message = "Answer obrigatorio")
     private Answer answer;
 
     @Column
-    @NotEmpty
-    private Integer score;
+    @NotNull(message = "score obrigatorio")
+    private Long score;
 
-    @Column
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate createdAt;
-
-    @Column
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate updateAt;
 }

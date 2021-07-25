@@ -1,7 +1,9 @@
 package br.com.questions.controllers;
 
+import br.com.questions.dto.UserDto;
 import br.com.questions.entity.User;
 import br.com.questions.service.UserService;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +23,16 @@ public class UserController {
     @Autowired
     private UserService service;
 
+    @ApiOperation(value = "Insere novo Usuario")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public User save(@RequestBody @Valid User user) {
+    public User save(@RequestBody @Valid UserDto userDto) {
         MDC.clear();
         MDC.put("Insert User: ", String.valueOf(UUID.randomUUID()));
-        return service.insertUser(user);
+        return service.insertUser(userDto);
     }
 
+    @ApiOperation(value = "Pesquida Usuario por Id")
     @GetMapping("{id}")
     public User findById(@PathVariable Long id) {
         MDC.clear();
@@ -36,6 +40,7 @@ public class UserController {
         return service.findById(id);
     }
 
+    @ApiOperation(value = "Delete Usuario por Id")
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
@@ -44,14 +49,16 @@ public class UserController {
         this.service.deleteUser(id);
     }
 
+    @ApiOperation(value = "Atualiza Usuario")
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@PathVariable Long id, @Valid @RequestBody User newUser) {
+    public void update(@PathVariable Long id, @Valid @RequestBody UserDto userDto) {
         MDC.clear();
         MDC.put("Update User: ", String.valueOf(UUID.randomUUID()));
-        this.service.updateUser(id, newUser);
+        this.service.updateUser(id, userDto);
     }
 
+    @ApiOperation(value = "Pesquida Paginada Usuario")
     @GetMapping
     public Page<User> list(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
