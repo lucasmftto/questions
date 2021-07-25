@@ -1,6 +1,9 @@
 # Projeto fórum de pergunstas e respostas
 
 ###### Configurar a conexão com BD no applications.properties.
+    spring.datasource.url=jdbc:mysql://localhost:3306/questions
+    spring.datasource.username=<meuUsuario>
+    spring.datasource.password=<minhaSenha>
 
 ###### Criar os banco de dados: questions:
     CREATE DATABASE questions;
