@@ -1,0 +1,620 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Questions",
+		"_postman_id": "17383580-3907-b66b-8cb2-34b59744e379",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Inserir Role",
+			"request": {
+				"url": "http://localhost:8080/role/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"description\" : \"Dev\",\n\t\"enabled\": true\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Find Role",
+			"request": {
+				"url": "http://localhost:8080/role/",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Role",
+			"request": {
+				"url": "http://localhost:8080/role/2",
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update Role",
+			"request": {
+				"url": "http://localhost:8080/role/5",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"description\" : \"Incluindo 5 description Alteracao\",\n\t\"enabled\": false\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Find Users",
+			"request": {
+				"url": "http://localhost:8080/user/",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Inserir User",
+			"request": {
+				"url": "http://localhost:8080/user/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\" : \"teste12\",\n\t\"email\": \"teste12@gmail\",\n\t\"birthDate\": \"23/02/1992\",\n\t\"roleId\": 1\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Delete user",
+			"request": {
+				"url": "http://localhost:8080/user/1",
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Inserir Flag",
+			"request": {
+				"url": "http://localhost:8080/flag/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"description\" : \"MongoDB\",\n\t\"enabled\": true\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Find all Flags",
+			"request": {
+				"url": "http://localhost:8080/flag/",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "FindById Flag",
+			"request": {
+				"url": "http://localhost:8080/flag/2",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Flag",
+			"request": {
+				"url": "http://localhost:8080/flag/2",
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update Flag",
+			"request": {
+				"url": "http://localhost:8080/flag/4",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t  \"description\": \"Spring Boot\",\n       \"enabled\": true\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Save Question",
+			"request": {
+				"url": "http://localhost:8080/question/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"comment\" : \"O que é  Spring Boot\",\n\t\"idFlag\" : 1,\n\t\"idUser\" : 2,\n\t\"enabled\": false\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Find All Question",
+			"request": {
+				"url": "http://localhost:8080/question/",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "FindById Question",
+			"request": {
+				"url": "http://localhost:8080/question/5",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Question",
+			"request": {
+				"url": "http://localhost:8080/question/5",
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update Question",
+			"request": {
+				"url": "http://localhost:8080/question/1",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n        \"idUser\": 2,\n        \"idFlag\": 3,\n        \"comment\": \"O que é  MongoDB\",\n        \"resolved\": true\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Inserir ReputationUser",
+			"request": {
+				"url": "http://localhost:8080/reputationUser/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"idUser\" : 3,\n\t\"score\": 1\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Find All reputationUser",
+			"request": {
+				"url": "http://localhost:8080/reputationUser/",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "FindById ReputationUser",
+			"request": {
+				"url": "http://localhost:8080/reputationUser/4",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update ReputationUser",
+			"request": {
+				"url": "http://localhost:8080/reputationUser/4",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"idUser\" : 4,\n\t\"score\": 2\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Delete ReputationUser",
+			"request": {
+				"url": "http://localhost:8080/reputationUser/1",
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Inserir Answer",
+			"request": {
+				"url": "http://localhost:8080/answer/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"comment\" : \"Linguagem\",\n\t\"idQuestion\" : 2,\n\t\"idUser\" : 2\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Find All Answer",
+			"request": {
+				"url": "http://localhost:8080/answer/",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "FindById Answer",
+			"request": {
+				"url": "http://localhost:8080/answer/2",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update Answer",
+			"request": {
+				"url": "http://localhost:8080/answer/2",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"comment\" : \"Linguagem de programacao\",\n\t\"idQuestion\" : 2,\n\t\"idUser\" : 2\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Save VoteAnswer",
+			"request": {
+				"url": "http://localhost:8080/voteAnswer/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"userId\" : 3,\n\t\"questionId\": 3,\n\t\"answerId\": 2,\n\t\"score\": 1\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Find All VoteAnswer",
+			"request": {
+				"url": "http://localhost:8080/voteAnswer/",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "FindById VoteAnswer",
+			"request": {
+				"url": "http://localhost:8080/voteAnswer/2",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update voteAnswer",
+			"request": {
+				"url": "http://localhost:8080/voteAnswer/5",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"userId\" : 3,\n\t\"questionId\": 3,\n\t\"answerId\": 2,\n\t\"score\": 4\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Delete VoteAnswer",
+			"request": {
+				"url": "http://localhost:8080/voteAnswer/4",
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Find User Filtro",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/user/?page=0&size=10&email=lu",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						""
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "size",
+							"value": "10",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "email",
+							"value": "lu",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update Resolved Question",
+			"request": {
+				"url": "http://localhost:8080/question/resolved/1",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " false\n    "
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Forum pesquisa Questions Filtro",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/forum/questions/?page=0&size=10&nomeUsuario=Maria",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"forum",
+						"questions",
+						""
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "size",
+							"value": "10",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "nomeUsuario",
+							"value": "Maria",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Pesquisa",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/forum/answer/?page=0&size=10&nomeUsuario=Jo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"forum",
+						"answer",
+						""
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "size",
+							"value": "10",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "nomeUsuario",
+							"value": "Jo",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
