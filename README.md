@@ -11,6 +11,6 @@
 ###### Para realizar a chamada dos andpoints pode utilizar o Swagger
     http://localhost:8080/swagger-ui.html#/
 
-###### Tambem pode utilizar a collection do Postman Disponibilizado  
+###### Tambem pode utilizar a collection do Postman Disponibilizado na raiz do projeto
     Questions.postman_collection.json
 
