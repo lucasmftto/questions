@@ -1,7 +1,11 @@
 package br.com.questions.controllers;
 
-import br.com.questions.entity.Role;
-import br.com.questions.service.RoleService;
+import br.com.questions.dto.ReputationUserDto;
+import br.com.questions.entity.Flag;
+import br.com.questions.entity.ReputationUser;
+import br.com.questions.entity.User;
+import br.com.questions.service.FlagService;
+import br.com.questions.service.ReputationUserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,35 +21,37 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(RoleController.class)
-public class RoleWebTest {
+@WebMvcTest(ReputationUserController.class)
+public class ReputationUserWebTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private RoleService service;
+    private ReputationUserService service;
 
     @Test
     public void findFromService() throws Exception {
         Long id = 1L;
-        Role mockRole = new Role(id, "RoleTestMock", true);
+        ReputationUser reputationUserFlag = new ReputationUser(id, new User(), 10L );
 
-        when(service.findById(id)).thenReturn(mockRole);
-        this.mockMvc.perform(get("/role/"+id)).andDo(print()).andExpect(status().isOk())
-                .andExpect(jsonPath("$.description").value(mockRole.getDescription()))
-                .andExpect(jsonPath("$.id").value(mockRole.getId()));
+        when(service.findByIdReputationUser(id)).thenReturn(reputationUserFlag);
+        this.mockMvc.perform(get("/reputationUser/"+id)).andDo(print()).andExpect(status().isOk())
+                .andExpect(jsonPath("$.score").value(reputationUserFlag.getScore()))
+                .andExpect(jsonPath("$.id").value(reputationUserFlag.getId()));
     }
 
     @Test
     public void insertFromService() throws Exception {
         Long id = 1L;
-        Role mockRole = new Role(id, "RoleTestMock", true);
+        ReputationUser reputationUserFlag = new ReputationUser(id, new User(), 10L );
 
-        when(service.insertRole(mockRole)).thenReturn(mockRole);
+        ReputationUserDto reputationUserDto = new ReputationUserDto(1L, 10L);
+
+        when(service.insertReputationUser(reputationUserDto)).thenReturn(reputationUserFlag);
         this.mockMvc.perform( MockMvcRequestBuilders
-                .post("/role")
-                .content(asJsonString(mockRole))
+                .post("/reputationUser")
+                .content(asJsonString(reputationUserDto))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
@@ -55,13 +61,15 @@ public class RoleWebTest {
     @Test
     public void deleteFromService() throws Exception {
         Long id = 1L;
-        Role mockRole = new Role(id, "RoleTestMock", true);
+        ReputationUser reputationUserFlag = new ReputationUser(id, new User(), 10L );
+        ReputationUserDto reputationUserDto = new ReputationUserDto(1L, 10L);
 
-        when(service.insertRole(mockRole)).thenReturn(mockRole);
+
+        when(service.insertReputationUser(reputationUserDto)).thenReturn(reputationUserFlag);
 
         this.mockMvc.perform( MockMvcRequestBuilders
-                .delete("/role/"+id)
-                .content(asJsonString(mockRole))
+                .delete("/reputationUser/"+id)
+                .content(asJsonString(reputationUserFlag))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is2xxSuccessful())
@@ -71,12 +79,13 @@ public class RoleWebTest {
     @Test
     public void updateFromService() throws Exception {
         Long id = 1L;
-        Role mockRole = new Role(id, "RoleTestMock", true);
+        ReputationUserDto reputationUserDto = new ReputationUserDto(1L, 10L);
+        ReputationUser reputationUserFlag = new ReputationUser(id, new User(), 10L );
 
-        when(service.insertRole(mockRole)).thenReturn(mockRole);
+        when(service.insertReputationUser(reputationUserDto)).thenReturn(reputationUserFlag);
         this.mockMvc.perform( MockMvcRequestBuilders
-                .put("/role/"+id)
-                .content(asJsonString(mockRole))
+                .put("/reputationUser/"+id)
+                .content(asJsonString(reputationUserDto))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is2xxSuccessful())
@@ -91,5 +100,4 @@ public class RoleWebTest {
             throw new RuntimeException(e);
         }
     }
-
 }

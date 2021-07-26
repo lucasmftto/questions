@@ -1,7 +1,7 @@
 package br.com.questions.controllers;
 
-import br.com.questions.entity.Role;
-import br.com.questions.service.RoleService;
+import br.com.questions.entity.Flag;
+import br.com.questions.service.FlagService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,35 +17,35 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(RoleController.class)
-public class RoleWebTest {
+@WebMvcTest(FlagController.class)
+public class FlagWebTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private RoleService service;
+    private FlagService service;
 
     @Test
     public void findFromService() throws Exception {
         Long id = 1L;
-        Role mockRole = new Role(id, "RoleTestMock", true);
+        Flag mockFlag = new Flag(id, "Dev", true );
 
-        when(service.findById(id)).thenReturn(mockRole);
-        this.mockMvc.perform(get("/role/"+id)).andDo(print()).andExpect(status().isOk())
-                .andExpect(jsonPath("$.description").value(mockRole.getDescription()))
-                .andExpect(jsonPath("$.id").value(mockRole.getId()));
+        when(service.findById(id)).thenReturn(mockFlag);
+        this.mockMvc.perform(get("/flag/"+id)).andDo(print()).andExpect(status().isOk())
+                .andExpect(jsonPath("$.description").value(mockFlag.getDescription()))
+                .andExpect(jsonPath("$.id").value(mockFlag.getId()));
     }
 
     @Test
     public void insertFromService() throws Exception {
         Long id = 1L;
-        Role mockRole = new Role(id, "RoleTestMock", true);
+        Flag mockFlag = new Flag(id, "Dev", true );
 
-        when(service.insertRole(mockRole)).thenReturn(mockRole);
+        when(service.insertFlag(mockFlag)).thenReturn(mockFlag);
         this.mockMvc.perform( MockMvcRequestBuilders
-                .post("/role")
-                .content(asJsonString(mockRole))
+                .post("/flag")
+                .content(asJsonString(mockFlag))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
@@ -55,13 +55,13 @@ public class RoleWebTest {
     @Test
     public void deleteFromService() throws Exception {
         Long id = 1L;
-        Role mockRole = new Role(id, "RoleTestMock", true);
+        Flag mockFlag = new Flag(id, "Dev", true );
 
-        when(service.insertRole(mockRole)).thenReturn(mockRole);
+        when(service.insertFlag(mockFlag)).thenReturn(mockFlag);
 
         this.mockMvc.perform( MockMvcRequestBuilders
-                .delete("/role/"+id)
-                .content(asJsonString(mockRole))
+                .delete("/flag/"+id)
+                .content(asJsonString(mockFlag))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is2xxSuccessful())
@@ -71,12 +71,12 @@ public class RoleWebTest {
     @Test
     public void updateFromService() throws Exception {
         Long id = 1L;
-        Role mockRole = new Role(id, "RoleTestMock", true);
+        Flag mockFlag = new Flag(id, "Dev", true );
 
-        when(service.insertRole(mockRole)).thenReturn(mockRole);
+        when(service.insertFlag(mockFlag)).thenReturn(mockFlag);
         this.mockMvc.perform( MockMvcRequestBuilders
-                .put("/role/"+id)
-                .content(asJsonString(mockRole))
+                .put("/flag/"+id)
+                .content(asJsonString(mockFlag))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is2xxSuccessful())
@@ -91,5 +91,4 @@ public class RoleWebTest {
             throw new RuntimeException(e);
         }
     }
-
 }
