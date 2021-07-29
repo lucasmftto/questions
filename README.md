@@ -1,4 +1,4 @@
-##### intenção é separar o projeto e isolar a responsabilidade 
+## intenção é separar o projeto e isolar a responsabilidade 
 
 # Projeto fórum de pergunstas e respostas
 
