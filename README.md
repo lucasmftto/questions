@@ -1,3 +1,5 @@
+##### intenção é separar o projeto e isolar a responsabilidade 
+
 # Projeto fórum de pergunstas e respostas
 
 ###### Configurar a conexão com BD no applications.properties.
